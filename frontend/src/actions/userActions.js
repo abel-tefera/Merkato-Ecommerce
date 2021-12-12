@@ -11,7 +11,7 @@ import {
   USER_DETAILS_FAIL,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
-  USER_UPDATE_PROFILE_REQUEST
+  USER_UPDATE_PROFILE_REQUEST,
 } from '../constants/userConstants';
 import axios from 'axios';
 
@@ -47,6 +47,9 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
+  localStorage.removeItem('shippingAddress');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('paymentMethod');
   dispatch({ type: USER_LOGOUT });
 };
 
@@ -110,7 +113,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     });
   }
 };
-
 
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
