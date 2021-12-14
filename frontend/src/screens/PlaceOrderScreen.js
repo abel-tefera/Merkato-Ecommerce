@@ -137,9 +137,8 @@ const PlaceOrderScreen = ({ history }) => {
                   type='button'
                   className='btn btn-block'
                   style={{ width: '-webkit-fill-available' }}
-                  disabled={cart.cartItems.length === 0}
+                  disabled={cart.cartItems.length === 0 || loadingBtn}
                   onClick={placeOrderHandler}
-                  disabled={loadingBtn}
                 >
                   {loadingBtn ? 'Loading…' : 'Place Order'}
                 </Button>

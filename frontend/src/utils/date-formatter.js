@@ -8,9 +8,10 @@ function formatDate(dateTime, type) {
 
   var yearAgo = moment().subtract(365, 'days').startOf('day');
 
+  var retTime;
   switch (type) {
     case 'time':
-      return moment(dateTime).format('hh:mm A');
+      retTime = moment(dateTime).format('hh:mm A');
       break;
     case 'date':
       var sentDay = moment(dateTime);
@@ -23,11 +24,14 @@ function formatDate(dateTime, type) {
           return sentDay.format('dddd');
         }
       } else if (sentDay.isAfter(yearAgo)) {
-        return sentDay.format('MMMM D');
+        retTime = sentDay.format('MMMM D');
       } else {
-        return sentDay.format('D/M/YY');
+        retTime = sentDay.format('D/M/YY');
       }
       break;
+    default:
+      return null;
   }
+  return retTime;
 }
 export default formatDate;
