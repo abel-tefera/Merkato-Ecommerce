@@ -12,6 +12,7 @@ import {
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
+  ORDER_DETAILS_RESET,
 } from '../constants/orderConstants';
 
 import axios from 'axios';
@@ -46,6 +47,9 @@ const OrderScreen = ({ match, history }) => {
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
+    } else if (!userInfo.isAdmin && order && order.user._id !== userInfo._id) {
+      dispatch({ type: ORDER_DETAILS_RESET });
+      history.push('/');
     }
 
     const addPayPalScript = async () => {
@@ -73,7 +77,6 @@ const OrderScreen = ({ match, history }) => {
   }, [dispatch, orderId, order, successPay, history, userInfo, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -217,6 +220,7 @@ const OrderScreen = ({ match, history }) => {
                     <Button
                       onClick={deliverHandler}
                       className='btn btn-block'
+                      style={{ width: '-webkit-fill-available' }}
                       type='button'
                       disabled={loadingDeliver}
                     >

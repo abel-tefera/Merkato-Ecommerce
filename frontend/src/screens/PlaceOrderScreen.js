@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
+import { ORDER_DETAILS_RESET } from '../constants/orderConstants';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const PlaceOrderScreen = ({ history }) => {
   }, [history, success]);
 
   const placeOrderHandler = () => {
+    dispatch({ type: ORDER_DETAILS_RESET });
+
     dispatch(
       createOrder({
         orderItems: cart.cartItems,

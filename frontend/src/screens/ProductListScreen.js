@@ -4,6 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Paginate from '../components/Paginate';
 import {
   listProducts,
   deleteProduct,
@@ -12,16 +13,17 @@ import {
 import {
   PRODUCT_LIST_RESET,
   PRODUCT_CREATE_RESET,
-  PRODUCT_DELETE_RESET
+  PRODUCT_DELETE_RESET,
 } from '../constants/productConstants';
 
 const ProductListScreen = ({ history, match }) => {
+  const pageNumber = match.params.pageNumber || 1;
   const dispatch = useDispatch();
 
   const [del, setDel] = useState('0');
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   const productDelete = useSelector((state) => state.productDelete);
   const {
@@ -54,11 +56,11 @@ const ProductListScreen = ({ history, match }) => {
     } else {
       if (successDel) {
         dispatch({ type: PRODUCT_LIST_RESET });
-        dispatch({type: PRODUCT_DELETE_RESET});
+        dispatch({ type: PRODUCT_DELETE_RESET });
       }
-      dispatch(listProducts());
+      dispatch(listProducts('', pageNumber));
     }
-  }, [dispatch, history, userInfo, successDel, successCreate, createdProduct]);
+  }, [dispatch, history, userInfo, successDel, successCreate, createdProduct, pageNumber]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
@@ -99,59 +101,62 @@ const ProductListScreen = ({ history, match }) => {
       {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
       {loading ? (
-        <Loader top/>
+        <Loader top />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Table striped bordered hover responsive className='table-sm'>
-          <thead style={{ verticalAlign: 'middle' }}>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>PRICE</th>
-              <th>CATEGORY</th>
-              <th>BRAND</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody style={{ verticalAlign: 'middle' }}>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-                <td
-                  style={{
-                    textAlign: '-webkit-center',
-                    padding: '0',
-                    placeContent: 'center',
-                  }}
-                  className='d-flex'
-                >
-                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
-                      <i className='fas fa-edit' />
-                    </Button>
-                  </LinkContainer>
-                  <Button
-                    variant='danger'
-                    className='btn-sm'
-                    onClick={() => deleteHandler(product._id)}
-                    disabled={loadingDel && del === product._id}
-                  >
-                    {loadingDel && del === product._id ? (
-                      <i className='fas fa-spinner fa-spin' />
-                    ) : (
-                      <i className='fas fa-trash' />
-                    )}
-                  </Button>
-                </td>
+        <>
+          <Table striped bordered hover responsive className='table-sm'>
+            <thead style={{ verticalAlign: 'middle' }}>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>BRAND</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody style={{ verticalAlign: 'middle' }}>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product._id}</td>
+                  <td>{product.name}</td>
+                  <td>${product.price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+                  <td
+                    style={{
+                      textAlign: '-webkit-center',
+                      padding: '0',
+                      placeContent: 'center',
+                    }}
+                    className='d-flex'
+                  >
+                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                      <Button variant='light' className='btn-sm'>
+                        <i className='fas fa-edit' />
+                      </Button>
+                    </LinkContainer>
+                    <Button
+                      variant='danger'
+                      className='btn-sm'
+                      onClick={() => deleteHandler(product._id)}
+                      disabled={loadingDel && del === product._id}
+                    >
+                      {loadingDel && del === product._id ? (
+                        <i className='fas fa-spinner fa-spin' />
+                      ) : (
+                        <i className='fas fa-trash' />
+                      )}
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <Paginate isAdmin pages={pages} page={page} />
+        </>
       )}
     </>
   );
