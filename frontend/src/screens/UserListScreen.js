@@ -36,7 +36,7 @@ const UserListScreen = ({ history }) => {
     <>
       <h1>Users</h1>
       {loading ? (
-        <Loader />
+        <Loader top/>
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (

@@ -55,7 +55,7 @@ const ProfileScreen = ({ history }) => {
   return (
     <>
       {loading ? (
-        <Loader></Loader>
+        <Loader top/>
       ) : (
         <Row>
           <Col md={3}>
@@ -113,7 +113,7 @@ const ProfileScreen = ({ history }) => {
           <Col md={9}>
             <h2>My Orders</h2>
             {loadingOrders ? (
-              <Loader />
+              <Loader top/>
             ) : errorOrders ? (
               <Message variant='danger'>{errorOrders}</Message>
             ) : (
@@ -137,34 +137,34 @@ const ProfileScreen = ({ history }) => {
                         {formatDate(order.createdAt, 'time')}
                       </td>
                       <td>${order.totalPrice}</td>
-                      <td style={{textAlign: '-webkit-center'}}>
+                      <td>
                         {order.isPaid ? (
                           <span>
                             {formatDate(order.paidAt, 'date')} at{' '}
                             {formatDate(order.paidAt, 'time')}
                           </span>
                         ) : (
-                          <span>
+                          <div style={{textAlign: '-webkit-center'}}>
                             <i
                               className='fas fa-times'
                               style={{ color: 'red' }}
                             />
-                          </span>
+                          </div>
                         )}
                       </td>
-                      <td style={{textAlign: '-webkit-center'}}>
+                      <td>
                         {order.isDelivered ? (
                           <span>
                             {formatDate(order.deliveredAt, 'date')} at{' '}
                             {formatDate(order.deliveredAt, 'time')}
                           </span>
                         ) : (
-                          <span>
+                          <div style={{textAlign: '-webkit-center'}}>
                             <i
                               className='fas fa-times '
                               style={{ color: 'red' }}
                             />
-                          </span>
+                          </div>
                         )}
                       </td>
                       <td>

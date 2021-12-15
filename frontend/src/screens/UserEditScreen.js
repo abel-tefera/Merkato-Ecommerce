@@ -59,7 +59,7 @@ const UserEditScreen = ({ match, history }) => {
         <h1>Edit User</h1>
         {/* {error && <Message variant='danger'>{error}</Message>} */}
         {loading ? (
-          <Loader />
+          <Loader top/>
         ) : error ? (
           <Message variant='danger'>{error}</Message>
         ) : (
@@ -90,7 +90,7 @@ const UserEditScreen = ({ match, history }) => {
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></Form.Check>
             </Form.Group>
-            {error && <Message variant="danger">{errorUpd}</Message>}
+            {errorUpd && <Message variant="danger">{errorUpd}</Message>}
             <Button
               type='submit'
               variant='primary'

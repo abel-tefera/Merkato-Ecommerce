@@ -1,9 +1,9 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
-const Loader = () => {
+const Loader = ({ top }) => {
   return (
-    <div style={{marginTop: "15%"}}>
+    <div style={{ marginTop: top && '15%' }}>
       <Spinner
         animation='border'
         role='status'

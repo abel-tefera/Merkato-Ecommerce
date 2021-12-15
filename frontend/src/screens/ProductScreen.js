@@ -36,7 +36,7 @@ const ProductScreen = ({ history, match }) => {
         Go Back
       </Link>
       {loading ? (
-        <Loader />
+        <Loader top/>
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
@@ -61,7 +61,7 @@ const ProductScreen = ({ history, match }) => {
               </ListGroup.Item>
               <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
               <ListGroup.Item>
-                Description: ${product.description}
+                Description: {product.description}
               </ListGroup.Item>
             </ListGroup>
           </Col>
