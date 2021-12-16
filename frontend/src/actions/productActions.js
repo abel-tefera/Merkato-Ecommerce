@@ -20,6 +20,7 @@ import {
   PRODUCT_TOP_FAIL,
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_REQUEST,
+  PRODUCT_DETAILS_RESET,
 } from '../constants/productConstants';
 import axios from 'axios';
 
@@ -36,6 +37,10 @@ export const listProducts =
       dispatch({
         type: PRODUCT_LIST_SUCCESS,
         payload: data,
+      });
+
+      dispatch({
+        type: PRODUCT_DETAILS_RESET,
       });
     } catch (error) {
       dispatch({

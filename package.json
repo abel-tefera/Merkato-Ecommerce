@@ -1,7 +1,7 @@
 {
   "name": "reactshop",
   "version": "1.0.0",
-  "description": "Shoppy",
+  "description": "React-Shop",
   "main": "server.js",
   "type": "module",
   "scripts": {

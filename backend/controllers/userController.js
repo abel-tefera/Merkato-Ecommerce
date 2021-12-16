@@ -107,7 +107,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users
 // @access  Private/Admin
 const getAllUsers = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().sort('-createdAt');
   res.json(users);
 });
 
@@ -156,7 +156,6 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
     });
-
   } else {
     res.status(404);
     throw new Error('User not found');
@@ -172,5 +171,5 @@ export {
   getAllUsers,
   deleteUser,
   getUserById,
-  updateUser
+  updateUser,
 };

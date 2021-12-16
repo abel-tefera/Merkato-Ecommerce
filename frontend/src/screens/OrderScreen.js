@@ -66,6 +66,7 @@ const OrderScreen = ({ match, history }) => {
     if (!order || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch({ type: ORDER_DETAILS_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -112,7 +113,7 @@ const OrderScreen = ({ match, history }) => {
               <div className='width-50'>
                 {order.isDelivered ? (
                   <Message varaint='success'>
-                    Delivered on {formatDate(order.deliveredAt, 'date')} at{' '}
+                    <strong>Delivered: </strong> {formatDate(order.deliveredAt, 'date')} at{' '}
                     {formatDate(order.deliveredAt, 'time')}
                   </Message>
                 ) : (
@@ -129,7 +130,7 @@ const OrderScreen = ({ match, history }) => {
               <div className='width-50'>
                 {order.isPaid ? (
                   <Message varaint='success'>
-                    Paid on {formatDate(order.paidAt, 'date')} at{' '}
+                    <strong>Paid: </strong> {formatDate(order.paidAt, 'date')} at{' '}
                     {formatDate(order.paidAt, 'time')}
                   </Message>
                 ) : (

@@ -12,7 +12,7 @@ const Meta = ({ title, description, keywords }) => {
 };
 
 Meta.defaultProps = {
-  title: 'Welcome to ProShop',
+  title: 'Welcome to Merkato',
   keywords: 'Electronics, Groceries, Home Appliances, E-commerce',
   description: 'We have EVERYTHING',
 };

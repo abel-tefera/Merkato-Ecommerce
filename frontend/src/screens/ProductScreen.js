@@ -30,7 +30,7 @@ const ProductScreen = ({ history, match }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
 
   const dispatch = useDispatch();
 
@@ -51,7 +51,7 @@ const ProductScreen = ({ history, match }) => {
     if (successPrReview) {
       setRating(0);
       setComment('');
-      setMessage('Product successfully reviewed');
+      // setMessage('Product successfully reviewed');
       dispatch({ type: PRODUCT_CREATE_RESET });
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }

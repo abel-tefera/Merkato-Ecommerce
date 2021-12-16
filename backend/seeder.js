@@ -12,10 +12,8 @@ import connectDB from './config/db.js';
 dotenv.config();
 
 connectDB();
-function between(min, max) {  
-  return Math.floor(
-    Math.random() * (max - min) + min
-  )
+function between(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 const importData = async () => {
@@ -42,10 +40,10 @@ const importData = async () => {
         description: product.breadcrumbs,
         brand: product.brand,
         category: product.brand,
-        price: (product.price * Math.random()).toFixed(2),
-        countInStock: product.availability == 'InStock' ? between(1, 50) : 0,
-        rating: Number(product.avg_rating) > 0 ? Number(product.avg_rating) : (Math.random() * 5).toFixed(2),
-        numReviews: Number(product.reviews_count) > 0 ? Number(product.reviews_count) : (between(0, 20)).toFixed(2),
+        price: (product.price * (Math.random() + between(0, 5))).toFixed(2),
+        countInStock: product.availability == 'InStock' ? between(1, 25) : 0,
+        rating: (Math.random() * 4).toFixed(2),
+        numReviews: 0,
         user: adminUser,
       };
     });

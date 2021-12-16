@@ -16,6 +16,10 @@ main {
   min-height: 80vh;
 }
 
+strong {
+  font-weight: bold !important;
+}
+
 h3 {
   padding: 1rem 0;
 }

@@ -17,6 +17,7 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
+  ORDER_DETAILS_RESET,
 } from '../constants/orderConstants';
 import { CART_CLEAR } from '../constants/cartConstants';
 
@@ -163,6 +164,9 @@ export const listMyOrders = () => async (dispatch, getState) => {
     dispatch({
       type: ORDER_MY_LIST_SUCCESS,
       payload: data,
+    });
+    dispatch({
+      type: ORDER_DETAILS_RESET,
     });
   } catch (error) {
     dispatch({
