@@ -2,11 +2,12 @@
 import dotenv from 'dotenv';
 import users from './data/users.js';
 // import products from './data/products.js';
-import newProducts from './data/newProducts.js';
-
+// import newProducts from './data/newProducts.js';
+// import adidas from './data/adidas.js';
+import ebay from './data/ebay.js';
 import User from './models/userModel.js';
 import Product from './models/productModel.js';
-import Order from './models/userModel.js';
+import Order from './models/orderModel.js';
 import connectDB from './config/db.js';
 
 dotenv.config();
@@ -33,16 +34,22 @@ const importData = async () => {
     //   };
     // });
 
-    const sampleProducts = newProducts.map((product) => {
+    const sampleProducts = ebay.map((product) => {
       return {
-        name: product.name,
-        image: product.images,
-        description: product.breadcrumbs,
-        brand: product.brand,
-        category: product.brand,
-        price: (product.price * (Math.random() + between(0, 5))).toFixed(2),
-        countInStock: product.availability == 'InStock' ? between(1, 25) : 0,
-        rating: (Math.random() * 4).toFixed(2),
+        name: product.name ? product.name : 'ebay',
+        image:
+          product.images && product.images !== ''
+            ? product.images.split('~')[0]
+            : '/uploads/nature.jpg',
+        description: product.breadcrumbs ? product.breadcrumbs : 'ebay',
+        brand: product.brand ? product.brand : 'ebay',
+        category: product.brand ? product.brand : 'ebay',
+        price:
+          product.price !== ''
+            ? Number(product.price)
+            : (between(1, 100) * Math.random()).toFixed(2),
+        countInStock: product.in_stock === 'True' ? between(1, 25) : 0,
+        rating: 0,
         numReviews: 0,
         user: adminUser,
       };
