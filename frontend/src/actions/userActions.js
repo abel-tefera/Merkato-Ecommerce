@@ -27,6 +27,8 @@ import {
 import { ORDER_MY_LIST_RESET } from '../constants/orderConstants';
 
 import axios from 'axios';
+import { getCart } from './cartActions';
+import { CART_CLEAR } from '../constants/cartConstants';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -47,6 +49,8 @@ export const login = (email, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
     localStorage.setItem('userInfo', JSON.stringify(data));
+
+    dispatch(getCart());
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -60,14 +64,15 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
-  localStorage.removeItem('shippingAddress');
+  // localStorage.removeItem('shippingAddress');
   localStorage.removeItem('cartItems');
-  localStorage.removeItem('paymentMethod');
-  localStorage.removeItem('__paypal_storage__');
+  // localStorage.removeItem('paymentMethod');
+  // localStorage.removeItem('__paypal_storage__');
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_MY_LIST_RESET });
   dispatch({ type: USER_LIST_RESET });
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: CART_CLEAR });
 };
 
 export const register = (name, email, password) => async (dispatch) => {

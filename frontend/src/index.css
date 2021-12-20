@@ -68,9 +68,10 @@ h1 {
 
 .carousel img {
   height: 300px;
+  width: 300px;
   padding: 30px;
-  margin: 40px;
-  border-radius: 50%;
+  margin-top: 55px;
+  border-radius: 100%;
   margin-left: auto;
   margin-right: auto;
 }

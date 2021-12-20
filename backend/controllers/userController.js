@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler';
+import Cart from '../models/cartModel.js';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
@@ -89,6 +90,9 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (user) {
+      await Cart.create({
+        user: user._id,
+      });
       res.status(201).json({
         _id: user._id,
         name: user.name,

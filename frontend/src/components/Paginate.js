@@ -21,6 +21,7 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
     usePage.length > 1 && (
       <Pagination style={{ justifyContent: 'center' }}>
         <LinkContainer
+          disabled={page === 1}
           to={
             !isAdmin
               ? keyword
@@ -78,6 +79,7 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
         )}
 
         <LinkContainer
+        disabled={page === pages}
           to={
             !isAdmin
               ? keyword

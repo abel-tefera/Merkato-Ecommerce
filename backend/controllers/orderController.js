@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import Product from '../models/productModel.js';
+import Cart from '../models/cartModel.js';
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -33,6 +34,11 @@ const addOrderItems = asyncHandler(async (req, res) => {
     });
 
     const createdOrder = await order.save();
+    const cart = await Cart.findOne({ user: req.user._id });
+    if (cart) {
+      cart.items = [];
+      await cart.save();
+    }
     res.status(201).json(createdOrder);
   }
 });
