@@ -30,7 +30,7 @@ const importData = async () => {
     });
     
     await Cart.insertMany(cart);
-    // const adminUser = createdUsers[0]._id;
+    const adminUser = createdUsers[0]._id;
 
     // const sampleProducts = products.map((product) => {
     //   return {
@@ -39,28 +39,28 @@ const importData = async () => {
     //   };
     // });
 
-    // const sampleProducts = ebay.map((product) => {
-    //   return {
-    //     name: product.name ? product.name : 'ebay',
-    //     image:
-    //       product.images && product.images !== ''
-    //         ? product.images.split('~')[0]
-    //         : '/uploads/nature.jpg',
-    //     description: product.breadcrumbs ? product.breadcrumbs : 'ebay',
-    //     brand: product.brand ? product.brand : 'ebay',
-    //     category: product.brand ? product.brand : 'ebay',
-    //     price:
-    //       product.price !== ''
-    //         ? Number(product.price)
-    //         : (between(1, 100) * Math.random()).toFixed(2),
-    //     countInStock: product.in_stock === 'True' ? between(1, 25) : 0,
-    //     rating: 0,
-    //     numReviews: 0,
-    //     user: adminUser,
-    //   };
-    // });
+    const sampleProducts = ebay.map((product) => {
+      return {
+        name: product.name ? product.name : 'ebay',
+        image:
+          product.images && product.images !== ''
+            ? product.images.split('~')[0]
+            : '/uploads/nature.jpg',
+        description: product.breadcrumbs ? product.breadcrumbs : 'ebay',
+        brand: product.brand ? product.brand : 'ebay',
+        category: product.brand ? product.brand : 'ebay',
+        price:
+          product.price !== ''
+            ? Number(product.price)
+            : (between(1, 100) * Math.random()).toFixed(2),
+        countInStock: product.in_stock === 'True' ? between(1, 25) : 0,
+        rating: 0,
+        numReviews: 0,
+        user: adminUser,
+      };
+    });
 
-    // await Product.insertMany(sampleProducts);
+    await Product.insertMany(sampleProducts);
 
     console.log('Data imported!');
     process.exit();
