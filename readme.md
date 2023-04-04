@@ -4,7 +4,7 @@
 
 E-commerce application build using the **MERN** stack.
 
-[Live](https://www.credential.net/1929f96a-d9dc-4008-852a-922973f04f72)
+[Live](https://merkato-market.onrender.com)
 
 ## Features
 
