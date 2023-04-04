@@ -2,7 +2,7 @@
   "name": "reactshop",
   "version": "1.0.0",
   "description": "React-Shop",
-  "main": "server.js",
+  "main": "./backend/server.js",
   "type": "module",
   "scripts": {
     "start": "node server",
